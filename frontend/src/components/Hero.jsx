@@ -6,11 +6,11 @@ import { motion } from 'framer-motion';
 
 const StarField = (props) => {
     const ref = useRef();
-    const sphere = useMemo(() => random.inSphere(new Float32Array(5000), { radius: 1.5 }), []);
+    const sphere = useMemo(() => random.inSphere(new Float32Array(8000), { radius: 1.2 }), []);
 
     useFrame((state, delta) => {
-        ref.current.rotation.x -= delta / 10;
-        ref.current.rotation.y -= delta / 15;
+        ref.current.rotation.x -= delta / 15;
+        ref.current.rotation.y -= delta / 20;
     });
 
     return (
@@ -18,10 +18,11 @@ const StarField = (props) => {
             <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
                 <PointMaterial
                     transparent
-                    color="#3B82F6"
+                    color="#60A5FA"
                     size={0.002}
                     sizeAttenuation={true}
                     depthWrite={false}
+                    blending={2}
                 />
             </Points>
         </group>
@@ -35,13 +36,14 @@ const Hero = () => {
                 <Canvas camera={{ position: [0, 0, 1] }}>
                     <StarField />
                 </Canvas>
+                <div className="absolute inset-0 bg-gradient-radial from-transparent via-dark/40 to-dark pointer-events-none" />
             </div>
 
-            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 >
                     <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
                         <span className="text-sm font-medium text-accent-blue tracking-wide uppercase">Next Gen Agency</span>

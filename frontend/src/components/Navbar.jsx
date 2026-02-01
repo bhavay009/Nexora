@@ -25,7 +25,9 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 glass-panel' : 'py-6 bg-transparent'
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${scrolled
+                ? 'py-4 bg-dark/70 backdrop-blur-xl border-white/10 supports-[backdrop-filter]:bg-dark/60'
+                : 'py-6 bg-transparent border-transparent'
                 }`}
         >
             <div className='container mx-auto px-6 flex justify-between items-center'>
