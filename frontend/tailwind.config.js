@@ -7,31 +7,22 @@ export default {
     theme: {
         extend: {
             colors: {
-                dark: "#0B0E14",
-                "dark-accent": "#151921",
-                accent: {
-                    blue: "#3B82F6",
-                    purple: "#8B5CF6",
-                },
-                muted: "#9CA3AF",
+                'cream': '#F5F3F0',
+                'ink': '#1A1A1A',
+                'stone': '#888888',
+                'warm': '#E8E4E0',
             },
             fontFamily: {
-                heading: ["Space Grotesk", "sans-serif"],
-                body: ["Inter", "sans-serif"],
+                'heading': ['"Playfair Display"', 'Georgia', 'serif'],
+                'body': ['Inter', 'system-ui', 'sans-serif'],
             },
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'hero-gradient': 'linear-gradient(to right, #3B82F6, #8B5CF6)',
+            fontSize: {
+                'display': ['clamp(3rem, 10vw, 10rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+                'hero': ['clamp(2.5rem, 8vw, 7rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                'title': ['clamp(1.5rem, 4vw, 3rem)', { lineHeight: '1.2' }],
             },
-            animation: {
-                'spin-slow': 'spin 8s linear infinite',
-                'float': 'float 6s ease-in-out infinite',
-            },
-            keyframes: {
-                float: {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-20px)' },
-                }
+            spacing: {
+                'section': '12rem',
             }
         },
     },

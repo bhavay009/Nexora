@@ -1,81 +1,136 @@
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
-import * as random from 'maath/random/dist/maath-random.esm';
+import React from 'react';
 import { motion } from 'framer-motion';
 
-const StarField = (props) => {
-    const ref = useRef();
-    const sphere = useMemo(() => random.inSphere(new Float32Array(8000), { radius: 1.2 }), []);
-
-    useFrame((state, delta) => {
-        ref.current.rotation.x -= delta / 15;
-        ref.current.rotation.y -= delta / 20;
-    });
-
-    return (
-        <group rotation={[0, 0, Math.PI / 4]}>
-            <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-                <PointMaterial
-                    transparent
-                    color="#60A5FA"
-                    size={0.002}
-                    sizeAttenuation={true}
-                    depthWrite={false}
-                    blending={2}
-                />
-            </Points>
-        </group>
-    );
-};
-
 const Hero = () => {
+    // NEXORA letters - Centered cluster with letter drop animation
+    const letters = [
+        { char: 'N', size: 'clamp(10rem, 24vw, 20rem)', top: '15%', left: '12%', rotate: -5 },
+        { char: 'E', size: 'clamp(7rem, 16vw, 12rem)', top: '10%', left: '32%', rotate: 10 },
+        { char: 'X', size: 'clamp(9rem, 20vw, 16rem)', top: '32%', left: '22%', rotate: -12 },
+        { char: 'O', size: 'clamp(12rem, 28vw, 24rem)', top: '50%', left: '8%', rotate: 0 },
+        { char: 'R', size: 'clamp(7rem, 15vw, 11rem)', top: '45%', left: '38%', rotate: 18 },
+        { char: 'A', size: 'clamp(9rem, 20vw, 16rem)', top: '72%', left: '26%', rotate: -10 },
+    ];
+
+    // Letter drop animation
+    const letterVariants = {
+        hidden: (i) => ({
+            opacity: 0,
+            y: -300,
+            rotate: (i % 2 === 0 ? -30 : 30),
+        }),
+        visible: (i) => ({
+            opacity: 1,
+            y: 0,
+            rotate: letters[i].rotate,
+            transition: {
+                type: 'spring',
+                damping: 10,
+                stiffness: 50,
+                delay: i * 0.08,
+            }
+        })
+    };
+
+    const headlineVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }
+        }
+    };
+
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-dark">
-            <div className="absolute inset-0 z-0">
-                <Canvas camera={{ position: [0, 0, 1] }}>
-                    <StarField />
-                </Canvas>
-                <div className="absolute inset-0 bg-gradient-radial from-transparent via-dark/40 to-dark pointer-events-none" />
-            </div>
+        <section
+            className="relative min-h-screen overflow-hidden"
+            style={{
+                backgroundColor: 'var(--color-cream)',
+                cursor: 'default'
+            }}
+        >
+            {/* NEXORA Letters with Drop Animation */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none">
+                {letters.map((letter, i) => (
+                    <motion.div
+                        key={letter.char + i}
+                        custom={i}
+                        initial="hidden"
+                        animate="visible"
+                        variants={letterVariants}
+                        className="absolute"
+                        style={{
+                            fontSize: letter.size,
+                            top: letter.top,
+                            left: letter.left,
+                            fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
+                            fontWeight: 900,
+                            color: 'var(--color-ink)',
+                            lineHeight: 0.8,
+                            userSelect: 'none',
+                        }}
+                    >
+                        {letter.char}
+                    </motion.div>
+                ))}
 
-            <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+                {/* ® Symbol */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="absolute"
+                    style={{
+                        bottom: '15%',
+                        left: '45%',
+                        fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                        fontWeight: 300,
+                        color: 'var(--color-ink)',
+                    }}
                 >
-                    <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-                        <span className="text-sm font-medium text-accent-blue tracking-wide uppercase">Next Gen Agency</span>
-                    </div>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 leading-tight">
-                        We Build <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
-                            High-Impact
-                        </span>{" "}
-                        <br />
-                        Digital Experiences
-                    </h1>
-                    <p className="text-muted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-                        Elevating brands through premium design, cutting-edge technology, and futuristic interactions.
-                    </p>
-
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                        <button className="px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:scale-105 transition-transform duration-300">
-                            Get a Website
-                        </button>
-                        <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 font-medium text-lg transition-colors duration-300 backdrop-blur-sm">
-                            View Our Work
-                        </button>
-                    </div>
+                    ®
                 </motion.div>
             </div>
 
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
-                    <div className="w-1 h-2 bg-white/50 rounded-full mt-2"></div>
-                </div>
-            </div>
+            {/* Headline - Upper Right */}
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={headlineVariants}
+                className="absolute top-32 md:top-40 right-8 md:right-16 lg:right-20 max-w-md z-10"
+            >
+                <p
+                    className="text-xs uppercase tracking-[0.2em] mb-3"
+                    style={{ color: 'var(--color-stone)' }}
+                >
+                    (We Are)
+                </p>
+                <h1
+                    style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+                        color: 'var(--color-ink)',
+                        lineHeight: 1.2,
+                        fontWeight: 400,
+                    }}
+                >
+                    The digital-first<br />
+                    agency for modern<br />
+                    brands.
+                </h1>
+            </motion.div>
+
+            {/* Black underline at bottom */}
+            <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute bottom-0 left-0 w-full origin-left"
+                style={{
+                    backgroundColor: 'var(--color-ink)',
+                    height: '3px',
+                }}
+            />
         </section>
     );
 };

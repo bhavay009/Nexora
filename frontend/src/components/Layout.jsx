@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import CustomCursor from './CustomCursor';
 
 const Layout = ({ children }) => {
     useEffect(() => {
@@ -10,11 +9,8 @@ const Layout = ({ children }) => {
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
-            gestureDirection: 'vertical',
             smooth: true,
-            mouseMultiplier: 1,
             smoothTouch: false,
-            touchMultiplier: 2,
         });
 
         function raf(time) {
@@ -30,10 +26,16 @@ const Layout = ({ children }) => {
     }, []);
 
     return (
-        <div className='antialiased text-white bg-dark min-h-screen flex flex-col'>
-            <CustomCursor />
+        <div
+            className='antialiased min-h-screen flex flex-col'
+            style={{
+                backgroundColor: 'var(--color-cream)',
+                color: 'var(--color-ink)',
+                cursor: 'default'
+            }}
+        >
             <Navbar />
-            <main className='flex-grow z-10 relative'>
+            <main className='flex-grow'>
                 {children}
             </main>
             <Footer />

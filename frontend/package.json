@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/playfair-display": "^5.2.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.29.2",
     "gsap": "^3.14.2",
     "lenis": "^1.3.17",
@@ -19,8 +21,9 @@
     "maath": "^0.10.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.0",
+    "react-router-dom": "^6.28.0",
     "reset-css": "^5.0.2",
+    "split-type": "^0.3.4",
     "three": "^0.182.0"
   },
   "devDependencies": {
@@ -28,7 +31,7 @@
     "@tailwindcss/postcss": "^4.1.18",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.24",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -36,6 +39,6 @@
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
-    "vite": "^7.2.4"
+    "vite": "^5.4.11"
   }
 }

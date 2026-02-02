@@ -1,95 +1,138 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import Magnetic from './Magnetic';
-
-const navLinks = [
-    { name: 'Services', path: '/services' },
-    { name: 'Work', path: '/work' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-];
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [time, setTime] = useState('');
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        // Time update logic
+        const updateTime = () => {
+            const now = new Date();
+            setTime(now.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+                timeZone: 'Asia/Kolkata'
+            }));
+        };
+
+        updateTime();
+        const timer = setInterval(updateTime, 1000);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearInterval(timer);
+        };
     }, []);
 
-    return (
-        <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${scrolled
-                ? 'py-4 bg-dark/70 backdrop-blur-xl border-white/10 supports-[backdrop-filter]:bg-dark/60'
-                : 'py-6 bg-transparent border-transparent'
-                }`}
-        >
-            <div className='container mx-auto px-6 flex justify-between items-center'>
-                <Link to='/' className='text-2xl font-bold font-heading tracking-tighter'>
-                    Nexora<span className='text-accent-blue'>.</span>
-                </Link>
+    const navLinks = [
+        { name: 'About', path: '/about' },
+        { name: 'Services', path: '/services' },
+        { name: 'Work', path: '/work' },
+        { name: 'Contact', path: '/contact' },
+    ];
 
-                {/* Desktop Menu */}
-                <div className='hidden md:flex items-center space-x-8'>
-                    {navLinks.map((link) => (
-                        <Magnetic key={link.name}>
-                            <Link
+    return (
+        <>
+            <nav
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-4 bg-cream/95 backdrop-blur-sm' : 'py-8'
+                    }`}
+                style={{
+                    color: 'var(--color-ink)'
+                }}
+            >
+                <div className="max-w-full px-6 md:px-12 flex justify-between items-center relative">
+
+                    {/* Left: Logo */}
+                    <NavLink
+                        to="/"
+                        className="text-2xl z-20"
+                        style={{
+                            fontFamily: 'Reckless, "Reckless Fallback"',
+                            fontStyle: 'normal',
+                            lineHeight: 1.5,
+                            fontWeight: 900,
+                            color: 'rgb(34, 31, 32)'
+                        }}
+                    >
+                        NEXORA
+                    </NavLink>
+
+                    {/* Center: Nav Links (Desktop) */}
+                    <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 lg:gap-12">
+                        {navLinks.map((link) => (
+                            <NavLink
+                                key={link.name}
                                 to={link.path}
-                                className='text-sm font-medium hover:text-accent-blue transition-colors px-4 py-2 block relative group'
+                                className="text-xs uppercase tracking-[0.15em] transition-opacity hover:opacity-60 font-medium"
                             >
                                 {link.name}
-                                <span className='absolute bottom-1 left-4 w-0 h-0.5 bg-accent-blue transition-all group-hover:w-[calc(100%-2rem)]'></span>
-                            </Link>
-                        </Magnetic>
-                    ))}
-                    <Magnetic>
-                        <Link
-                            to='/contact'
-                            className='px-6 py-2 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium inline-block'
+                            </NavLink>
+                        ))}
+                    </div>
+
+                    {/* Right: Time / Mobile Menu Toggle */}
+                    <div className="flex items-center gap-4 z-20">
+                        {/* Time Display */}
+                        <div className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest font-medium">
+                            <span>DEL</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            <span>{time}</span>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden"
+                            onClick={() => setMenuOpen(!menuOpen)}
                         >
-                            Let's Talk
-                        </Link>
-                    </Magnetic>
+                            <span className="text-sm uppercase tracking-widest font-bold">
+                                {menuOpen ? 'Close' : 'Menu'}
+                            </span>
+                        </button>
+                    </div>
+
                 </div>
+            </nav>
 
-                {/* Mobile Toggle */}
-                <button
-                    className='md:hidden text-white z-50'
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-
-                {/* Mobile Menu */}
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className='fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center space-y-8 md:hidden'
-                        >
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
+            {/* Mobile Menu */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10"
+                        style={{ backgroundColor: 'var(--color-cream)' }}
+                    >
+                        {navLinks.map((link, i) => (
+                            <motion.div
+                                key={link.name}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                            >
+                                <NavLink
                                     to={link.path}
-                                    className='text-3xl font-heading font-medium hover:text-accent-purple transition-colors'
-                                    onClick={() => setIsOpen(false)}
+                                    className="text-4xl hover:opacity-60 transition-opacity"
+                                    style={{
+                                        fontFamily: 'var(--font-heading)',
+                                    }}
+                                    onClick={() => setMenuOpen(false)}
                                 >
                                     {link.name}
-                                </Link>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </nav>
+                                </NavLink>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 

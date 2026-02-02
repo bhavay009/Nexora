@@ -3,90 +3,61 @@ import { motion } from 'framer-motion';
 import { Monitor, Layout, Coffee, ShoppingBag, Smartphone, BarChart } from 'lucide-react';
 
 const services = [
-    { icon: Layout, title: 'Website Design', desc: 'Award-winning UI/UX that converts visitors into customers.' },
-    { icon: Monitor, title: 'Website Development', desc: 'Blazing fast, SEO-optimized code built with modern stacks.' },
-    { icon: Coffee, title: 'Café & Restaurant', desc: 'Digital menus and reservations systems for local businesses.' },
-    { icon: ShoppingBag, title: 'E-Commerce', desc: 'Scalable online stores that drive sales and engagement.' },
-    { icon: Smartphone, title: 'Web Apps', desc: 'Complex functionality wrapped in simple, intuitive interfaces.' },
-    { icon: BarChart, title: 'Growth & SEO', desc: 'Data-driven strategies to boost your online visibility.' },
+    { icon: Monitor, title: 'Web Development', desc: 'Fast, secure, and scalable websites built with modern code.' },
+    { icon: Layout, title: 'Landing Pages', desc: 'High-converting single pages designed to sell your product or service.' },
+    { icon: Smartphone, title: 'UI Implementation', desc: 'Pixel-perfect implementation of your designs.' },
+    { icon: ShoppingBag, title: 'Maintenance & Support', desc: 'We keep your site running smoothly so you don\'t have to.' },
 ];
 
 const Expertise = () => {
     return (
-        <section className="py-24 bg-dark relative z-10">
-            <div className="container mx-auto px-6">
-                <div className="mb-16 text-center">
+        <section className="py-24 bg-dark px-6">
+            <div className="container mx-auto max-w-5xl">
+                <div className="mb-20 text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-heading font-bold mb-6"
+                        className="text-4xl md:text-5xl font-heading font-medium mb-6 text-charcoal"
                     >
-                        Our Expertise
+                        What We Do
                     </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-muted max-w-2xl mx-auto text-lg"
-                    >
-                        We blend creativity with technology to deliver solutions that stand out.
-                    </motion.p>
+                    <p className="text-muted text-lg font-body max-w-xl mx-auto">
+                        Focused services tailored for growth and impact.
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="space-y-12">
                     {services.map((service, index) => (
-                        <Card key={index} service={service} index={index} />
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="group border-t border-charcoal/10 pt-12 flex flex-col md:flex-row md:items-start justify-between gap-6"
+                        >
+                            <div className="md:w-1/3">
+                                <span className="text-sm font-body text-muted uppercase tracking-wider mb-2 block">0{index + 1}</span>
+                                <h3 className="text-3xl font-heading text-charcoal group-hover:text-accent-blue transition-colors duration-300">
+                                    {service.title}
+                                </h3>
+                            </div>
+                            <div className="md:w-1/2">
+                                <p className="text-lg text-muted font-body leading-relaxed group-hover:text-charcoal transition-colors duration-300">
+                                    {service.desc}
+                                </p>
+                            </div>
+                            <div className="md:w-auto flex justify-end">
+                                <div className="w-12 h-12 rounded-full border border-charcoal/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-4 group-hover:translate-x-0">
+                                    <service.icon className="w-5 h-5 text-accent-blue" />
+                                </div>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
         </section>
-    );
-};
-
-const Card = ({ service, index }) => {
-    const mouseX = React.useRef(0);
-    const mouseY = React.useRef(0);
-    const cardRef = React.useRef(null);
-
-    const handleMouseMove = (e) => {
-        const { left, top } = cardRef.current.getBoundingClientRect();
-        mouseX.current = e.clientX - left;
-        mouseY.current = e.clientY - top;
-        cardRef.current.style.setProperty('--mouse-x', `${mouseX.current}px`);
-        cardRef.current.style.setProperty('--mouse-y', `${mouseY.current}px`);
-    };
-
-    return (
-        <motion.div
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="relative p-8 rounded-2xl bg-white/5 border border-white/10 overflow-hidden group hover:border-white/20 transition-colors duration-500"
-        >
-            <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                    background: `radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(59, 130, 246, 0.15), transparent 40%)`
-                }}
-            />
-
-            <div className="relative z-10">
-                <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:bg-accent-blue/20 transition-colors duration-500">
-                    <service.icon className="w-7 h-7 text-white group-hover:text-accent-blue transition-colors duration-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 font-heading group-hover:text-accent-blue transition-colors duration-500">
-                    {service.title}
-                </h3>
-                <p className="text-muted leading-relaxed group-hover:text-white/80 transition-colors duration-500">
-                    {service.desc}
-                </p>
-            </div>
-        </motion.div>
     );
 };
 
