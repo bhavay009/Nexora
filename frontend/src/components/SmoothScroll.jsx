@@ -1,11 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 
+// Create context for Lenis
+const LenisContext = createContext(null);
+
+// Hook to access Lenis instance
+export const useLenis = () => useContext(LenisContext);
+
 const SmoothScroll = ({ children }) => {
-    const lenisRef = useRef(null);
+    const [lenis, setLenis] = useState(null);
 
     useEffect(() => {
-        const lenis = new Lenis({
+        const lenisInstance = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
@@ -13,21 +19,25 @@ const SmoothScroll = ({ children }) => {
             smoothTouch: false,
         });
 
-        lenisRef.current = lenis;
+        setLenis(lenisInstance);
 
         function raf(time) {
-            lenis.raf(time);
+            lenisInstance.raf(time);
             requestAnimationFrame(raf);
         }
 
         requestAnimationFrame(raf);
 
         return () => {
-            lenis.destroy();
+            lenisInstance.destroy();
         };
     }, []);
 
-    return <>{children}</>;
+    return (
+        <LenisContext.Provider value={lenis}>
+            {children}
+        </LenisContext.Provider>
+    );
 };
 
 export default SmoothScroll;

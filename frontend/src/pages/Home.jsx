@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import { LetterReveal, RevealParagraph } from '../components/LetterReveal';
 
 const Home = () => {
     const fadeInUp = {
@@ -36,7 +37,8 @@ const Home = () => {
                         >
                             About
                         </p>
-                        <h2
+                        <LetterReveal
+                            as="h2"
                             className="mb-12"
                             style={{
                                 fontFamily: 'var(--font-heading)',
@@ -44,17 +46,20 @@ const Home = () => {
                                 lineHeight: 'var(--line-height-hero)',
                                 color: 'var(--color-ink)'
                             }}
+                            stagger={0.03}
+                            duration={0.6}
                         >
-                            We believe in the power of <span className="italic">simplicity</span>
-                        </h2>
-                        <p
+                            We believe in the power of simplicity
+                        </LetterReveal>
+                        <RevealParagraph
+                            as="p"
                             className="text-xl md:text-2xl leading-relaxed max-w-3xl"
                             style={{ color: 'var(--color-stone)' }}
+                            stagger={0.015}
+                            duration={0.5}
                         >
-                            At Nexora, we strip away the unnecessary to focus on what truly matters.
-                            We build digital experiences that are both beautiful and functional,
-                            helping forward-thinking brands connect with their audience.
-                        </p>
+                            At Nexora, we strip away the unnecessary to focus on what truly matters. We build digital experiences that are both beautiful and functional, helping forward-thinking brands connect with their audience.
+                        </RevealParagraph>
                     </motion.div>
                 </div>
             </section>
@@ -77,7 +82,8 @@ const Home = () => {
                         >
                             Services
                         </p>
-                        <h2
+                        <LetterReveal
+                            as="h2"
                             className="mb-20"
                             style={{
                                 fontFamily: 'var(--font-heading)',
@@ -85,9 +91,11 @@ const Home = () => {
                                 lineHeight: 'var(--line-height-hero)',
                                 color: 'var(--color-ink)'
                             }}
+                            stagger={0.04}
+                            duration={0.6}
                         >
                             What we do
-                        </h2>
+                        </LetterReveal>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-20">
@@ -143,7 +151,8 @@ const Home = () => {
                     variants={fadeInUp}
                     className="text-center max-w-4xl mx-auto"
                 >
-                    <h2
+                    <LetterReveal
+                        as="h2"
                         className="mb-10"
                         style={{
                             fontFamily: 'var(--font-heading)',
@@ -151,10 +160,11 @@ const Home = () => {
                             lineHeight: 'var(--line-height-hero)',
                             color: 'var(--color-ink)'
                         }}
+                        stagger={0.03}
+                        duration={0.6}
                     >
-                        Ready to start<br />
-                        <span className="italic">your project?</span>
-                    </h2>
+                        Ready to start your project?
+                    </LetterReveal>
                     <p
                         className="text-xl mb-16"
                         style={{ color: 'var(--color-stone)' }}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { LetterReveal, RevealParagraph } from '../components/LetterReveal';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -54,7 +55,8 @@ const Contact = () => {
                         >
                             Contact
                         </p>
-                        <h1
+                        <LetterReveal
+                            as="h1"
                             className="mb-10 uppercase"
                             style={{
                                 fontFamily: 'var(--font-heading)',
@@ -64,15 +66,19 @@ const Contact = () => {
                                 fontWeight: 900,
                                 letterSpacing: '-0.02em'
                             }}
+                            stagger={0.04}
+                            duration={0.6}
                         >
                             Let's talk
-                        </h1>
-                        <p
+                        </LetterReveal>
+                        <RevealParagraph
+                            as="p"
                             className="text-xl leading-relaxed mb-16"
                             style={{ color: 'var(--color-stone)' }}
+                            stagger={0.015}
                         >
                             Ready to start your project? Send us a message and we'll get back to you within 24 hours.
-                        </p>
+                        </RevealParagraph>
 
                         <div className="space-y-8">
                             <div>

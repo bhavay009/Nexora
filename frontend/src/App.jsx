@@ -8,7 +8,35 @@ import Work from './pages/Work';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
-import SmoothScroll from './components/SmoothScroll';
+import SmoothScroll, { useLenis } from './components/SmoothScroll';
+
+// Scroll to top on route change - uses Lenis for smooth scroll compatibility
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  const lenis = useLenis();
+
+  React.useLayoutEffect(() => {
+    // Use Lenis scrollTo if available, otherwise fallback to native
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    // Fallback timeout to ensure scroll sticks
+    const timeoutId = setTimeout(() => {
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }, 50);
+
+    return () => clearTimeout(timeoutId);
+  }, [pathname, lenis]);
+
+  return null;
+};
 
 // Page Transition Component
 const PageTransition = () => {
@@ -31,6 +59,7 @@ function AppContent() {
 
   return (
     <SmoothScroll>
+      <ScrollToTop />
       <Layout>
         {/* Transition Overlay triggers on route change */}
         <AnimatePresence mode='wait'>
@@ -60,3 +89,4 @@ function App() {
 }
 
 export default App;
+

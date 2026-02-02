@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { LetterReveal, RevealParagraph } from '../components/LetterReveal';
 
 const About = () => {
     const fadeInUp = {
@@ -28,7 +29,8 @@ const About = () => {
                     >
                         About Us
                     </p>
-                    <h1
+                    <LetterReveal
+                        as="h1"
                         className="mb-10 uppercase"
                         style={{
                             fontFamily: 'var(--font-heading)',
@@ -38,16 +40,19 @@ const About = () => {
                             fontWeight: 900,
                             letterSpacing: '-0.02em'
                         }}
+                        stagger={0.03}
+                        duration={0.6}
                     >
-                        We build websites<br />
-                        <span className="opacity-70">THAT WORK</span>
-                    </h1>
-                    <p
+                        We build websites THAT WORK
+                    </LetterReveal>
+                    <RevealParagraph
+                        as="p"
                         className="text-xl leading-relaxed max-w-2xl mx-auto"
                         style={{ color: 'var(--color-stone)' }}
+                        stagger={0.015}
                     >
                         Technology should be invisible. We focus on outcomes, not complexity.
-                    </p>
+                    </RevealParagraph>
                 </motion.div>
             </section>
 
@@ -63,7 +68,8 @@ const About = () => {
                         viewport={{ once: true, margin: "-100px" }}
                         variants={fadeInUp}
                     >
-                        <h2
+                        <LetterReveal
+                            as="h2"
                             className="mb-16 uppercase"
                             style={{
                                 fontFamily: 'var(--font-heading)',
@@ -72,9 +78,11 @@ const About = () => {
                                 color: 'var(--color-ink)',
                                 fontWeight: 900
                             }}
+                            stagger={0.04}
+                            duration={0.6}
                         >
                             Our philosophy
-                        </h2>
+                        </LetterReveal>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                             {[
                                 { title: 'Simplicity', desc: 'We strip away the unnecessary to focus on what matters.' },
@@ -121,17 +129,18 @@ const About = () => {
                         viewport={{ once: true, margin: "-100px" }}
                         variants={fadeInUp}
                     >
-                        <p
+                        <RevealParagraph
+                            as="p"
                             className="text-2xl md:text-3xl leading-relaxed"
                             style={{
                                 fontFamily: 'var(--font-heading)',
                                 color: 'var(--color-ink)'
                             }}
+                            stagger={0.02}
+                            duration={0.5}
                         >
-                            At Nexora, we believe technology should be silent. We don't just write code;
-                            we solve problems. We treat your business like our own—no jargon, no hidden fees,
-                            just solid engineering and clean design.
-                        </p>
+                            At Nexora, we believe technology should be silent. We don't just write code; we solve problems. We treat your business like our own—no jargon, no hidden fees, just solid engineering and clean design.
+                        </RevealParagraph>
                     </motion.div>
                 </div>
             </section>

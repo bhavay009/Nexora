@@ -50,8 +50,8 @@ const Navbar = () => {
                 <div className="max-w-full px-6 md:px-12 flex justify-between items-center relative">
 
                     {/* Left: Logo */}
-                    <NavLink
-                        to="/"
+                    <a
+                        href="/"
                         className="text-2xl z-20"
                         style={{
                             fontFamily: 'Reckless, "Reckless Fallback"',
@@ -62,18 +62,18 @@ const Navbar = () => {
                         }}
                     >
                         NEXORA
-                    </NavLink>
+                    </a>
 
                     {/* Center: Nav Links (Desktop) */}
                     <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 lg:gap-12">
                         {navLinks.map((link) => (
-                            <NavLink
+                            <a
                                 key={link.name}
-                                to={link.path}
+                                href={link.path}
                                 className="text-xs uppercase tracking-[0.15em] transition-opacity hover:opacity-60 font-medium"
                             >
                                 {link.name}
-                            </NavLink>
+                            </a>
                         ))}
                     </div>
 
@@ -117,16 +117,15 @@ const Navbar = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
                             >
-                                <NavLink
-                                    to={link.path}
+                                <a
+                                    href={link.path}
                                     className="text-4xl hover:opacity-60 transition-opacity"
                                     style={{
                                         fontFamily: 'var(--font-heading)',
                                     }}
-                                    onClick={() => setMenuOpen(false)}
                                 >
                                     {link.name}
-                                </NavLink>
+                                </a>
                             </motion.div>
                         ))}
                     </motion.div>
