@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Monitor, Layout, Coffee, ShoppingBag, Smartphone, BarChart } from 'lucide-react';
+import { Monitor, Layout, Smartphone, ShieldCheck } from 'lucide-react';
 
 const services = [
     { icon: Monitor, title: 'Web Development', desc: 'Fast, secure, and scalable websites built with modern code.' },
     { icon: Layout, title: 'Landing Pages', desc: 'High-converting single pages designed to sell your product or service.' },
     { icon: Smartphone, title: 'UI Implementation', desc: 'Pixel-perfect implementation of your designs.' },
-    { icon: ShoppingBag, title: 'Maintenance & Support', desc: 'We keep your site running smoothly so you don\'t have to.' },
+    { icon: ShieldCheck, title: 'Maintenance & Support', desc: 'We keep your site running smoothly so you don\'t have to.' },
 ];
 
 const Expertise = () => {
