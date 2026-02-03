@@ -12,8 +12,12 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('loading');
+
+        // Use environment variable or fallback to localhost for development
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
         try {
-            const res = await fetch('http://localhost:5000/api/contact', {
+            const res = await fetch(`${apiUrl}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -21,6 +25,8 @@ const Contact = () => {
             if (res.ok) {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
+                // Auto-reset success state after 5 seconds
+                setTimeout(() => setStatus('idle'), 5000);
             } else {
                 setStatus('error');
             }

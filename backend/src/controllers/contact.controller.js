@@ -1,6 +1,5 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 const { validationResult } = require('express-validator');
+const { sendContactEmail } = require('../services/email.service');
 
 exports.submitContact = async (req, res) => {
     const errors = validationResult(req);
@@ -8,33 +7,33 @@ exports.submitContact = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, type, budget, message } = req.body;
+    const { name, email, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !message) {
+        return res.status(400).json({ error: 'Name, email, and message are required' });
+    }
 
     try {
-        const submission = await prisma.contactSubmission.create({
-            data: {
-                name,
-                email,
-                type,
-                budget,
-                message,
-            },
-        });
+        // Send email via Resend
+        const emailResult = await sendContactEmail(name, email, message);
 
-        res.status(201).json({ message: 'Submission received', id: submission.id });
+        if (!emailResult.success) {
+            console.error('Email sending failed:', emailResult.error);
+            return res.status(500).json({ error: 'Failed to send message. Please try again.' });
+        }
+
+        res.status(201).json({
+            message: 'Message received! We\'ll get back to you soon.',
+            emailSent: true
+        });
     } catch (error) {
         console.error('Contact Submission Error:', error);
         res.status(500).json({ error: 'Server error processing submission' });
     }
 };
 
+// Optional: Get submissions (if you later add a database)
 exports.getSubmissions = async (req, res) => {
-    try {
-        const submissions = await prisma.contactSubmission.findMany({
-            orderBy: { createdAt: 'desc' }
-        });
-        res.json(submissions);
-    } catch (error) {
-        res.status(500).json({ error: 'Server error fetching submissions' });
-    }
+    res.json({ message: 'Database storage not configured. Emails are sent directly.' });
 };
