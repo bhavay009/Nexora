@@ -106,7 +106,8 @@ const Contact = () => {
                                     Phone
                                 </p>
                                 <p className="text-lg" style={{ color: 'var(--color-ink)' }}>
-                                    8827815687
+                                    +91 7235040768
+
                                 </p>
                             </div>
                             <div>

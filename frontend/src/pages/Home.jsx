@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import { LetterReveal, RevealParagraph } from '../components/LetterReveal';
 
+
 const Home = () => {
     const fadeInUp = {
         hidden: { opacity: 0, y: 50 },

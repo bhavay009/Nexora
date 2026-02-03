@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LetterReveal, RevealParagraph } from '../components/LetterReveal';
+import Beyond from '../components/Beyond';
 
 const About = () => {
     const fadeInUp = {
@@ -144,6 +145,9 @@ const About = () => {
                     </motion.div>
                 </div>
             </section>
+
+            {/* Beyond Section */}
+            <Beyond />
 
         </main>
     );

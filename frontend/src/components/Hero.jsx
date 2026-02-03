@@ -1,33 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Hero3D from './Hero3D';
 
 const Hero = () => {
-    // NEXORA letters - Centered cluster with letter drop animation
+    // NEXORA letters - Aligned at bottom with drop animation
     const letters = [
-        { char: 'N', size: 'clamp(10rem, 24vw, 20rem)', top: '15%', left: '12%', rotate: -5 },
-        { char: 'E', size: 'clamp(7rem, 16vw, 12rem)', top: '10%', left: '32%', rotate: 10 },
-        { char: 'X', size: 'clamp(9rem, 20vw, 16rem)', top: '32%', left: '22%', rotate: -12 },
-        { char: 'O', size: 'clamp(12rem, 28vw, 24rem)', top: '50%', left: '8%', rotate: 0 },
-        { char: 'R', size: 'clamp(7rem, 15vw, 11rem)', top: '45%', left: '38%', rotate: 18 },
-        { char: 'A', size: 'clamp(9rem, 20vw, 16rem)', top: '72%', left: '26%', rotate: -10 },
+        { char: 'N', size: '20vw', left: '2%', rotate: 0 },
+        { char: 'E', size: '20vw', left: '18%', rotate: 0 },
+        { char: 'X', size: '20vw', left: '34%', rotate: 0 },
+        { char: 'O', size: '20vw', left: '50%', rotate: 0 },
+        { char: 'R', size: '20vw', left: '66%', rotate: 0 },
+        { char: 'A', size: '20vw', left: '82%', rotate: 0 },
     ];
 
     // Letter drop animation
     const letterVariants = {
-        hidden: (i) => ({
-            opacity: 0,
-            y: -300,
-            rotate: (i % 2 === 0 ? -30 : 30),
-        }),
+        hidden: {
+            y: '-100vh',
+            opacity: 0
+        },
         visible: (i) => ({
-            opacity: 1,
             y: 0,
-            rotate: letters[i].rotate,
+            opacity: 1,
             transition: {
                 type: 'spring',
-                damping: 10,
-                stiffness: 50,
-                delay: i * 0.08,
+                damping: 12,
+                stiffness: 60,
+                mass: 1.2,
+                delay: 0.5 + (i * 0.1), // Staggered start after initial load
             }
         })
     };
@@ -37,7 +37,7 @@ const Hero = () => {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }
+            transition: { duration: 1, delay: 1.5, ease: [0.22, 1, 0.36, 1] }
         }
     };
 
@@ -49,6 +49,25 @@ const Hero = () => {
                 cursor: 'default'
             }}
         >
+            {/* 3D Digital Core Animation - Top Left */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 2, delay: 1 }}
+                className="absolute"
+                style={{
+                    top: '15%',
+                    left: '15%',
+                    width: '30vw',
+                    height: '30vw',
+                    maxWidth: '400px',
+                    maxHeight: '400px',
+                    zIndex: 0
+                }}
+            >
+                <Hero3D />
+            </motion.div>
+
             {/* NEXORA Letters with Drop Animation */}
             <div className="absolute inset-0 w-full h-full pointer-events-none">
                 {letters.map((letter, i) => (
@@ -58,38 +77,21 @@ const Hero = () => {
                         initial="hidden"
                         animate="visible"
                         variants={letterVariants}
-                        className="absolute"
+                        className="absolute bottom-[3px]" // Sit exactly on the line
                         style={{
                             fontSize: letter.size,
-                            top: letter.top,
                             left: letter.left,
                             fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
                             fontWeight: 900,
                             color: 'var(--color-ink)',
-                            lineHeight: 0.8,
+                            lineHeight: 0.75, // Tight line height to sit flush
                             userSelect: 'none',
+                            transformOrigin: 'bottom center'
                         }}
                     >
                         {letter.char}
                     </motion.div>
                 ))}
-
-                {/* ® Symbol */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
-                    className="absolute"
-                    style={{
-                        bottom: '15%',
-                        left: '45%',
-                        fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                        fontWeight: 300,
-                        color: 'var(--color-ink)',
-                    }}
-                >
-                    ®
-                </motion.div>
             </div>
 
             {/* Headline - Upper Right */}
