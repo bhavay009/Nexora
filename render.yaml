@@ -17,9 +17,11 @@ services:
         sync: false
 
 
-staticSites:
+
   # Frontend Service (Static Site)
-  - name: nexora-frontend
+  - type: web
+    name: nexora-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
