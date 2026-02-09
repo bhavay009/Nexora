@@ -27,7 +27,4 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexora-backend
-          property: host
+        sync: false
