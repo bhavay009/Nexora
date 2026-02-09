@@ -20,6 +20,7 @@ const Admin = () => {
             if (!apiUrl.startsWith('http')) {
                 apiUrl = `https://${apiUrl}`;
             }
+            apiUrl = apiUrl.replace(/\/$/, '');
             const res = await fetch(`${apiUrl}/api/contact`, {
                 headers: { 'x-auth-token': token }
             });
@@ -42,6 +43,7 @@ const Admin = () => {
             if (!apiUrl.startsWith('http')) {
                 apiUrl = `https://${apiUrl}`;
             }
+            apiUrl = apiUrl.replace(/\/$/, '');
             const res = await fetch(`${apiUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

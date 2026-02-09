@@ -74,6 +74,7 @@ const Contact = () => {
         if (!apiUrl.startsWith('http')) {
             apiUrl = `https://${apiUrl}`;
         }
+        apiUrl = apiUrl.replace(/\/$/, '');
 
         try {
             const res = await fetch(`${apiUrl}/api/contact`, {
