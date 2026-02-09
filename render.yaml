@@ -3,8 +3,6 @@ services:
   - type: web
     name: nexora-backend
     runtime: node
-    region: singapore # Optional: defaults to Oregon, adjust as needed
-    plan: free # Optional: defaults to starter
     rootDir: backend
     buildCommand: npm install && npx prisma generate
     startCommand: npm start
