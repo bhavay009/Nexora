@@ -70,7 +70,10 @@ const Contact = () => {
         setStatus('loading');
 
         // Use environment variable or fallback to localhost for development
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        if (!apiUrl.startsWith('http')) {
+            apiUrl = `https://${apiUrl}`;
+        }
 
         try {
             const res = await fetch(`${apiUrl}/api/contact`, {

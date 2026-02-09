@@ -16,7 +16,10 @@ const Admin = () => {
 
     const fetchSubmissions = async () => {
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            if (!apiUrl.startsWith('http')) {
+                apiUrl = `https://${apiUrl}`;
+            }
             const res = await fetch(`${apiUrl}/api/contact`, {
                 headers: { 'x-auth-token': token }
             });
@@ -35,7 +38,10 @@ const Admin = () => {
         e.preventDefault();
         setError('');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            if (!apiUrl.startsWith('http')) {
+                apiUrl = `https://${apiUrl}`;
+            }
             const res = await fetch(`${apiUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
