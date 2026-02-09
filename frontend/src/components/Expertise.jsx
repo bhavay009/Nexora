@@ -1,12 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Monitor, Layout, Smartphone, ShieldCheck } from 'lucide-react';
+import { Monitor, Layout, Smartphone, ShieldCheck, Globe, Bot, TrendingUp, MousePointerClick } from 'lucide-react';
 
 const services = [
-    { icon: Monitor, title: 'Web Development', desc: 'Fast, secure, and scalable websites built with modern code.' },
-    { icon: Layout, title: 'Landing Pages', desc: 'High-converting single pages designed to sell your product or service.' },
-    { icon: Smartphone, title: 'UI Implementation', desc: 'Pixel-perfect implementation of your designs.' },
-    { icon: ShieldCheck, title: 'Maintenance & Support', desc: 'We keep your site running smoothly so you don\'t have to.' },
+    {
+        icon: Globe,
+        title: 'Search Architecture (GEO & AEO)',
+        desc: 'Engineered for the AI era. We build digital ecosystems optimized for Generative Engines and Google to ensure you dominate search results.'
+    },
+    {
+        icon: MousePointerClick,
+        title: 'High-Conversion Design',
+        desc: 'Aesthetics that perform. We craft psychology-driven interfaces designed to turn passive visitors into high-value clients.'
+    },
+    {
+        icon: Bot,
+        title: 'AI & Automation',
+        desc: 'Growth on autopilot. We implement intelligent agents and CRM workflows to automate lead capture, retention, and support.'
+    },
+    {
+        icon: TrendingUp,
+        title: 'Scalable Infrastructure',
+        desc: 'Built for speed and stability. Future-proof systems ensuring your digital presence expands effortlessly as your business grows.'
+    },
 ];
 
 const Expertise = () => {
@@ -23,7 +39,7 @@ const Expertise = () => {
                         What We Do
                     </motion.h2>
                     <p className="text-muted text-lg font-body max-w-xl mx-auto">
-                        Focused services tailored for growth and impact.
+                        Future-proof digital ecosystems built for visibility and scale.
                     </p>
                 </div>
 
