@@ -5,7 +5,7 @@ services:
     runtime: node
     region: singapore # Optional: defaults to Oregon, adjust as needed
     plan: free # Optional: defaults to starter
-    rootCommand: cd backend
+    rootDir: backend
     buildCommand: npm install && npx prisma generate
     startCommand: npm start
     envVars:
@@ -22,7 +22,7 @@ services:
 staticSites:
   # Frontend Service (Static Site)
   - name: nexora-frontend
-    rootCommand: cd frontend
+    rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
