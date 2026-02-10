@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -30,6 +31,18 @@ const Navbar = () => {
             clearInterval(timer);
         };
     }, []);
+
+    // Lock body scroll when menu is open
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [menuOpen]);
 
     const navLinks = [
         { name: 'About', path: '/about' },
@@ -88,11 +101,12 @@ const Navbar = () => {
 
                         {/* Mobile Menu Button */}
                         <button
-                            className="md:hidden"
+                            className="md:hidden z-50"
                             onClick={() => setMenuOpen(!menuOpen)}
+                            aria-label="Toggle Menu"
                         >
-                            <span className="text-sm uppercase tracking-widest font-bold">
-                                {menuOpen ? 'Close' : 'Menu'}
+                            <span className="text-sm font-bold">
+                                {menuOpen ? <X size={24} /> : <Menu size={24} />}
                             </span>
                         </button>
                     </div>

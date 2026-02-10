@@ -65,7 +65,7 @@ const Work = () => {
         <main style={{ backgroundColor: 'var(--color-cream)' }}>
 
             {/* Hero Section */}
-            <section className="min-h-[50vh] flex items-center justify-center px-6 md:px-12 lg:px-24 pt-40 pb-20">
+            <section className="min-h-[50vh] flex items-center justify-center px-6 md:px-12 lg:px-24 pt-28 md:pt-40 pb-16 md:pb-20">
                 <motion.div
                     initial="hidden"
                     animate="visible"
@@ -129,7 +129,7 @@ const Work = () => {
 
             {/* CTA Section */}
             <section
-                className="py-32 px-6 md:px-12 lg:px-24"
+                className="py-20 md:py-32 px-6 md:px-12 lg:px-24"
                 style={{ backgroundColor: 'var(--color-ink)' }}
             >
                 <motion.div

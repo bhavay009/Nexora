@@ -43,29 +43,33 @@ const Hero = () => {
 
     return (
         <section
-            className="relative min-h-screen overflow-hidden"
+            className="relative h-[85vh] md:min-h-screen overflow-hidden"
             style={{
                 backgroundColor: 'var(--color-cream)',
                 cursor: 'default'
             }}
         >
-            {/* 3D Digital Core Animation - Top Left */}
+            {/* 3D Digital Core Animation - Centered on Mobile, Top-Left on Desktop */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, delay: 1 }}
-                className="absolute"
+                className="absolute left-1/2 -translate-x-1/2 md:left-[15%] md:translate-x-0"
                 style={{
-                    top: '15%',
-                    left: '15%',
-                    width: '30vw',
-                    height: '30vw',
+                    top: '20%', // Adjusted for mobile center
+                    width: '60vw', // Larger on mobile
+                    height: '60vw',
                     maxWidth: '400px',
                     maxHeight: '400px',
                     zIndex: 0
                 }}
             >
-                <Hero3D />
+                <div className="md:hidden w-full h-full">
+                    <Hero3D />
+                </div>
+                <div className="hidden md:block w-full h-full" style={{ width: '30vw', height: '30vw', maxWidth: '400px', maxHeight: '400px' }}>
+                    <Hero3D />
+                </div>
             </motion.div>
 
             {/* NEXORA Letters with Drop Animation */}
@@ -77,14 +81,14 @@ const Hero = () => {
                         initial="hidden"
                         animate="visible"
                         variants={letterVariants}
-                        className="absolute bottom-[3px]" // Sit exactly on the line
+                        className="absolute bottom-[-1vw] md:bottom-[-0.5vw]" // Adjusted to sit flush
                         style={{
                             fontSize: letter.size,
                             left: letter.left,
                             fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
                             fontWeight: 900,
                             color: 'var(--color-ink)',
-                            lineHeight: 0.75, // Tight line height to sit flush
+                            lineHeight: 0.8, // Adjusted line height
                             userSelect: 'none',
                             transformOrigin: 'bottom center'
                         }}
@@ -99,7 +103,7 @@ const Hero = () => {
                 initial="hidden"
                 animate="visible"
                 variants={headlineVariants}
-                className="absolute top-32 md:top-40 right-8 md:right-16 lg:right-20 max-w-md z-10"
+                className="absolute top-28 md:top-40 right-6 md:right-16 lg:right-20 max-w-md z-10"
             >
                 <p
                     className="text-xs uppercase tracking-[0.2em] mb-3"

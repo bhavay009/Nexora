@@ -32,6 +32,11 @@ const Services = () => {
             title: 'Maintenance & Support',
             description: 'We keep your site running smoothly. Updates, backups, bug fixes, and content changes—we handle it all.',
             tags: ['Updates', 'Security', 'Support']
+        },
+        {
+            title: 'Chatbot Implementation',
+            description: 'AI-powered agents to engage customers and automate support. We build smart, conversational interfaces tailored to your business needs.',
+            tags: ['AI Agents', 'Automation', 'Support']
         }
     ];
 

@@ -22,7 +22,7 @@ const Home = () => {
 
             {/* About Section */}
             <section
-                className="min-h-screen flex items-center py-40 px-6 md:px-12 lg:px-24"
+                className="flex items-center py-16 md:py-40 px-6 md:px-12 lg:px-24"
                 style={{ backgroundColor: 'var(--color-cream)' }}
             >
                 <div className="max-w-5xl mx-auto">
@@ -67,7 +67,7 @@ const Home = () => {
 
             {/* Services Section */}
             <section
-                className="min-h-screen flex items-center py-40 px-6 md:px-12 lg:px-24"
+                className="flex items-center py-16 md:py-40 px-6 md:px-12 lg:px-24"
                 style={{ backgroundColor: 'var(--color-warm)' }}
             >
                 <div className="max-w-6xl mx-auto w-full">
@@ -104,7 +104,7 @@ const Home = () => {
                             { title: 'Web Development', desc: 'Blazing fast, secure, scalable websites built with modern technologies.' },
                             { title: 'Landing Pages', desc: 'High-converting pages designed to sell your product or service.' },
                             { title: 'UI Design', desc: 'Pixel-perfect interfaces that balance aesthetics with usability.' },
-                            { title: 'Consulting', desc: 'Strategic guidance to help your digital presence thrive.' },
+                            { title: 'Chatbot Integration', desc: 'AI-powered agents to engage customers and automate support.' },
                         ].map((service, i) => (
                             <motion.div
                                 key={service.title}
@@ -123,7 +123,7 @@ const Home = () => {
                                 style={{ borderTop: '1px solid rgba(107, 107, 107, 0.2)' }}
                             >
                                 <h3
-                                    className="text-2xl md:text-3xl mb-4"
+                                    className="text-3xl md:text-3xl mb-4"
                                     style={{
                                         fontFamily: 'var(--font-heading)',
                                         color: 'var(--color-ink)'
@@ -142,7 +142,7 @@ const Home = () => {
 
             {/* CTA Section */}
             <section
-                className="min-h-screen flex items-center justify-center py-40 px-6 md:px-12 lg:px-24"
+                className="flex items-center justify-center py-16 md:py-40 px-6 md:px-12 lg:px-24"
                 style={{ backgroundColor: 'var(--color-cream)' }}
             >
                 <motion.div

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Footer = () => {
     return (
         <footer
-            className="py-24 px-6 md:px-12"
+            className="py-16 md:py-24 px-6 md:px-12"
             style={{
                 backgroundColor: 'var(--color-cream)',
                 borderTop: '1px solid var(--color-warm)'
@@ -12,7 +12,7 @@ const Footer = () => {
         >
             <div className="max-w-7xl mx-auto">
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 mb-16 md:mb-24">
 
                     {/* Brand */}
                     <div>
