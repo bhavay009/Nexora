@@ -134,7 +134,7 @@ const Hero = () => {
                 className="absolute bottom-0 left-0 w-full origin-left"
                 style={{
                     backgroundColor: 'var(--color-ink)',
-                    height: '3px',
+                    height: '1px', // Thinner line
                 }}
             />
         </section>
