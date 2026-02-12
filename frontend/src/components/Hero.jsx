@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Hero3D from './Hero3D';
+// import Hero3D from './Hero3D';
 
 const Hero = () => {
     // NEXORA letters - Aligned at bottom with drop animation
@@ -49,27 +49,30 @@ const Hero = () => {
                 cursor: 'default'
             }}
         >
-            {/* 3D Digital Core Animation - Centered on Mobile, Top-Left on Desktop */}
+            {/* Background Video - Fills entire hero */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, delay: 1 }}
-                className="absolute left-1/2 -translate-x-1/2 md:left-[15%] md:translate-x-0"
-                style={{
-                    top: '20%', // Adjusted for mobile center
-                    width: '60vw', // Larger on mobile
-                    height: '60vw',
-                    maxWidth: '400px',
-                    maxHeight: '400px',
-                    zIndex: 0
-                }}
+                className="absolute inset-0"
+                style={{ zIndex: 0 }}
             >
-                <div className="md:hidden w-full h-full">
-                    <Hero3D />
-                </div>
-                <div className="hidden md:block w-full h-full" style={{ width: '30vw', height: '30vw', maxWidth: '400px', maxHeight: '400px' }}>
-                    <Hero3D />
-                </div>
+                <video
+                    src="/videos/animation.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                />
+                {/* Semi-transparent overlay so text stays readable */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'rgba(245, 240, 235, 0.55)',
+                        zIndex: 1
+                    }}
+                />
             </motion.div>
 
             {/* NEXORA Letters with Drop Animation */}
