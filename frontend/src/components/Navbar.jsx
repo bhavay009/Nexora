@@ -65,16 +65,21 @@ const Navbar = () => {
                     {/* Left: Logo */}
                     <a
                         href="/"
-                        className="text-2xl z-20"
-                        style={{
-                            fontFamily: 'Reckless, "Reckless Fallback"',
-                            fontStyle: 'normal',
-                            lineHeight: 1.5,
-                            fontWeight: 900,
-                            color: 'rgb(34, 31, 32)'
-                        }}
+                        className="z-20 block"
                     >
-                        NEXORA
+                        <img
+                            src="/images/logo-transparent.png"
+                            alt="NEXORA"
+                            className="h-32 md:h-40 w-auto object-contain"
+                            style={{
+                                display: 'block',
+                                filter: 'brightness(0)',
+                                maxWidth: '300px',
+                                marginTop: '-3rem',
+                                marginBottom: '-3rem',
+                                marginLeft: '-1rem'
+                            }}
+                        />
                     </a>
 
                     {/* Center: Nav Links (Desktop) */}
