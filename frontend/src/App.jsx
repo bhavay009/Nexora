@@ -8,6 +8,8 @@ import Work from './pages/Work';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import SmoothScroll, { useLenis } from './components/SmoothScroll';
 
 // Scroll to top on route change - uses Lenis for smooth scroll compatibility
@@ -72,6 +74,8 @@ function AppContent() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

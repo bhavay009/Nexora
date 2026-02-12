@@ -78,8 +78,8 @@ const Footer = () => {
                         © {new Date().getFullYear()} Nexora. All rights reserved.
                     </p>
                     <div className="flex gap-8 text-sm" style={{ color: 'var(--color-stone)' }}>
-                        <a href="#" className="hover:opacity-70 transition-opacity">Privacy</a>
-                        <a href="#" className="hover:opacity-70 transition-opacity">Terms</a>
+                        <NavLink to="/privacy" className="hover:opacity-70 transition-opacity">Privacy</NavLink>
+                        <NavLink to="/terms" className="hover:opacity-70 transition-opacity">Terms</NavLink>
                     </div>
                 </div>
 
