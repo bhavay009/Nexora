@@ -42,11 +42,11 @@ const Beyond = () => {
         };
     }, []);
 
-    // IntersectionObserver
+    // IntersectionObserver — watch the actual content, not the padded section
     useEffect(() => {
         if (!isReady || hasPlayed) return;
-        const section = sectionRef.current;
-        if (!section) return;
+        const content = contentRef.current;
+        if (!content) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -55,10 +55,13 @@ const Beyond = () => {
                     startSequence();
                 }
             },
-            { threshold: 0.05 } // Trigger when section just starts entering viewport
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -35% 0px' // Trigger only when content is near the center of the viewport
+            }
         );
 
-        observer.observe(section);
+        observer.observe(content);
         return () => observer.disconnect();
     }, [isReady, hasPlayed]);
 
