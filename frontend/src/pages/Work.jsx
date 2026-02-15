@@ -29,7 +29,7 @@ const projects = [
         category: 'Full Stack Web Application',
         description: 'A room and accommodation discovery platform featuring authentication flows, structured listings, and scalable UI architecture designed for future expansion.',
         highlights: ['Login & auth flows', 'Modular listing system', 'Scalable frontend structure'],
-        image: '/images/room-radar.png',
+        image: '/images/roomradar.png',
         link: 'https://room-radar-wheat.vercel.app/login'
     },
     {
