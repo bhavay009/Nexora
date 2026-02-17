@@ -67,7 +67,13 @@ const Contact = () => {
 
         if (!validateForm()) return;
 
-        setStatus('loading');
+        // Show success immediately — optimistic UI
+        setStatus('success');
+        const submittedData = { ...formData };
+        setFormData({ name: '', email: '', message: '' });
+
+        // Auto-reset success state after 2.5 seconds
+        const resetTimer = setTimeout(() => setStatus('idle'), 2500);
 
         // Use environment variable or fallback to localhost for development
         let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
@@ -76,22 +82,22 @@ const Contact = () => {
         }
         apiUrl = apiUrl.replace(/\/$/, '');
 
+        // Fire-and-forget — send in background, revert on failure
         try {
             const res = await fetch(`${apiUrl}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(submittedData)
             });
-            if (res.ok) {
-                setStatus('success');
-                setFormData({ name: '', email: '', message: '' });
-                // Auto-reset success state after 2.5 seconds
-                setTimeout(() => setStatus('idle'), 2500);
-            } else {
+            if (!res.ok) {
+                clearTimeout(resetTimer);
                 setStatus('error');
+                setFormData(submittedData); // Restore the form so they can retry
             }
         } catch {
+            clearTimeout(resetTimer);
             setStatus('error');
+            setFormData(submittedData);
         }
     };
 

@@ -14,23 +14,22 @@ exports.submitContact = async (req, res) => {
         return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    try {
-        // Send email via Resend
-        const emailResult = await sendContactEmail(name, email, message);
+    // Respond immediately — don't make the user wait for the email to send
+    res.status(202).json({
+        message: 'Message received! We\'ll get back to you soon.',
+        emailSent: true
+    });
 
-        if (!emailResult.success) {
-            console.error('Email sending failed:', emailResult.error);
-            return res.status(500).json({ error: 'Failed to send message. Please try again.' });
-        }
-
-        res.status(201).json({
-            message: 'Message received! We\'ll get back to you soon.',
-            emailSent: true
+    // Fire-and-forget: send email in the background
+    sendContactEmail(name, email, message)
+        .then((result) => {
+            if (!result.success) {
+                console.error('Background email sending failed:', result.error);
+            }
+        })
+        .catch((error) => {
+            console.error('Background email error:', error);
         });
-    } catch (error) {
-        console.error('Contact Submission Error:', error);
-        res.status(500).json({ error: 'Server error processing submission' });
-    }
 };
 
 // Optional: Get submissions (if you later add a database)
