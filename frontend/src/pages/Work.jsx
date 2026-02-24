@@ -21,7 +21,7 @@ const projects = [
         description: 'A calm and empathetic landing page concept for a mental health support platform. Designed with soft visuals, thoughtful typography, and an emotionally sensitive user experience.',
         highlights: ['Emotion-led UI', 'Minimal, calming design language', 'Story-driven layout'],
         image: '/images/solace.png',
-        link: 'https://solace-99aqi8fbz-priyansh-s-projects-eb60a61d.vercel.app/'
+        link: 'https://solace-psi.vercel.app/'
     },
     {
         id: 3,
